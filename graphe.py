@@ -30,13 +30,18 @@ class Graphe:
         self.arcs.append(self.ajouter_arc_inverse(arc))
     
     def retireArc(self, s_origine, s_extremite):
+        truc = False
         a = self.arcs.copy()
         for arc in a:
             if arc.s_origine == s_origine and arc.s_extremite == s_extremite:
                 self.arcs.remove(arc)
+                truc = True
             
             elif arc.s_extremite == s_origine and arc.s_origine == s_extremite:
                 self.arcs.remove(arc)
+                truc = True
+            
+        if not truc: print(s_origine, s_extremite)
 
     def sommet_adjacent(self, sommet):
         liste_sommets_adjacents = []
