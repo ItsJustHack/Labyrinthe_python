@@ -1,6 +1,7 @@
 from graphe import Sommet, Arc, Graphe
 from random import choice, randint
 from pile import Pile
+import pygame
 
 #but du projet: 
 """
@@ -92,9 +93,8 @@ def creer_labirynthe(k):
     damier_interne = creer_damier_vide(k-1, 0.5)
     labirynthe = creer_graphe(damier, k)
     graphe_interne = creer_graphe(damier_interne, k-1, 0.5)
-    parcours_interne = parcours_profondeur(graphe_interne, damier_interne[(0.5,0.5)])
-    print(len(parcours_interne))
-    
+    parcours_interne = parcours_profondeur(graphe_interne, damier_interne[(3.5,3.5)])
+
     for i in range(len(parcours_interne)-1):
         mouvement = direction(parcours_interne[i], parcours_interne[i+1])
         x_depart = parcours_interne[i][0]
@@ -103,7 +103,7 @@ def creer_labirynthe(k):
         y_arrivee = parcours_interne[i+1][1]
 
 
-        if mouvement == "haut": 
+        if mouvement == "haut":
             labirynthe.retireArc(damier[x_depart-0.5,y_depart-0.5],damier[x_arrivee+0.5, y_arrivee+0.5])
         elif mouvement == "bas":
             labirynthe.retireArc(damier[x_depart-0.5,y_depart+0.5],damier[x_arrivee+0.5, y_arrivee-0.5])
@@ -114,20 +114,32 @@ def creer_labirynthe(k):
 
     return labirynthe
 
-#a = creer_graphe(creer_damier_vide(8), 8)
-#print(a)
-#damier = creer_damier_vide(7,0.5)
-#graphe = creer_graphe(damier, 7, 0.5)
-#b = creer_graphe(damier ,7)
-#print(b)
-
-#print(damier)
-
-
-a = creer_labirynthe(7)
-print(a.compteur)
+a = creer_labirynthe(8)
 print(a.appel)
 
 
-    
+b = Graphe()
 
+s1 = Sommet("Sommet1", (0,0))
+s2 = Sommet("Sommet2", (1,0))
+b.ajouterArc(Arc("Mon arc", s1, s2))
+print(b.arcs)
+b.retireArc(s1, s2)
+print(b.arcs)
+
+
+pygame.init()
+screen = pygame.display.set_mode((600,600))
+pygame.display.set_caption("Echecs")
+
+running = True
+while running:
+    #mettre à jour l'écran
+    for arc in a.arcs:
+        x = (arc.s_origine.pos[0]*75, arc.s_origine.pos[1]*75)
+        y = (arc.s_extremite.pos[0]*75, arc.s_extremite.pos[1]*75)
+        pygame.draw.line(screen,"white",x, y, 1)   
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False

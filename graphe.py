@@ -27,18 +27,16 @@ class Graphe:
 
     def ajouterArc(self,arc):
         self.arcs.append(arc)
-        #self.arcs.append(self.ajouter_arc_inverse(arc))
+        self.arcs.append(self.ajouter_arc_inverse(arc))
     
     def retireArc(self, s_origine, s_extremite):
-        print(s_origine, s_extremite)
-        self.appel +=1 
-        for arc in self.arcs:
-            if arc.s_origine == s_origine and arc.s_extremite == s_extremite: 
+        a = self.arcs.copy()
+        for arc in a:
+            if arc.s_origine == s_origine and arc.s_extremite == s_extremite:
                 self.arcs.remove(arc)
-                self.compteur += 1
-            if arc.s_extremite == s_origine and arc.s_origine == s_extremite:
+            
+            elif arc.s_extremite == s_origine and arc.s_origine == s_extremite:
                 self.arcs.remove(arc)
-                self.compteur += 1
 
     def sommet_adjacent(self, sommet):
         liste_sommets_adjacents = []
