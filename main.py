@@ -4,8 +4,8 @@ from pile import Pile
 import pygame
 
 def creer_damier_vide(k,addition=0):
-        """créer un damier avec seulement des cases vides"""
-        return {(i+addition,j+addition) : Sommet((i+addition,j+addition),(i+addition,j+addition)) for i in range(k) for j in range(k)}
+    """créer un damier avec seulement des cases vides"""
+    return {(i+addition,j+addition) : Sommet((i+addition,j+addition),(i+addition,j+addition)) for i in range(k) for j in range(k)}
 
 def creer_graphe(damier, k, addition=0):
     """creer un graphe contenant des sommets"""
@@ -23,6 +23,7 @@ def creer_graphe(damier, k, addition=0):
 
 
 def creer_labirynthe(k):
+    """renvoie un graphe de longueur et largeur k, contenant un labirynthe"""
 
     damier = creer_damier_vide(k)
     damier_interne = creer_damier_vide(k-1, 0.5)
@@ -59,21 +60,22 @@ def direction(point_depart, point_arrivee):
 
 
 def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
-        mouvement = direction(sommet_origine, sommet_extremite)
-        x_depart = sommet_origine[0]
-        y_depart = sommet_origine[1]
-        x_arrivee = sommet_extremite[0]
-        y_arrivee = sommet_extremite[1]
+    """retire l'arc sur le graphe externe"""
+    mouvement = direction(sommet_origine, sommet_extremite)
+    x_depart = sommet_origine[0]
+    y_depart = sommet_origine[1]
+    x_arrivee = sommet_extremite[0]
+    y_arrivee = sommet_extremite[1]
 
 
-        if mouvement == "haut":
-            labirynthe.retireArc(damier[x_depart-0.5,y_depart-0.5],damier[x_arrivee+0.5, y_arrivee+0.5])
-        elif mouvement == "bas":
-            labirynthe.retireArc(damier[x_depart-0.5,y_depart+0.5],damier[x_arrivee+0.5, y_arrivee-0.5])
-        elif mouvement == "gauche": 
-            labirynthe.retireArc(damier[x_depart-0.5,y_depart-0.5],damier[x_arrivee+0.5, y_arrivee+0.5])
-        elif mouvement == "droite": 
-            labirynthe.retireArc(damier[x_depart+0.5,y_depart-0.5],damier[x_arrivee-0.5, y_arrivee+0.5])
+    if mouvement == "haut":
+        labirynthe.retireArc(damier[x_depart-0.5,y_depart-0.5],damier[x_arrivee+0.5, y_arrivee+0.5])
+    elif mouvement == "bas":
+        labirynthe.retireArc(damier[x_depart-0.5,y_depart+0.5],damier[x_arrivee+0.5, y_arrivee-0.5])
+    elif mouvement == "gauche":
+        labirynthe.retireArc(damier[x_depart-0.5,y_depart-0.5],damier[x_arrivee+0.5, y_arrivee+0.5])
+    elif mouvement == "droite":
+        labirynthe.retireArc(damier[x_depart+0.5,y_depart-0.5],damier[x_arrivee-0.5, y_arrivee+0.5])
 
 
 taille = int(input("Combien de largeur ?"))
