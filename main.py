@@ -2,6 +2,16 @@ from graphe import Sommet, Arc, Graphe
 from random import choice, randint
 from pile import Pile
 import pygame
+import time
+
+
+taille = int(input("Combien de largeur ?"))
+
+
+
+pygame.init()
+screen = pygame.display.set_mode((taille*60,taille*60))
+pygame.display.set_caption("Echecs")
 
 def creer_damier_vide(k,addition=0):
     """créer un damier avec seulement des cases vides"""
@@ -29,13 +39,16 @@ def creer_labirynthe(k):
     damier_interne = creer_damier_vide(k-1, 0.5)
     labirynthe = creer_graphe(damier, k)
     graphe_interne = creer_graphe(damier_interne, k-1, 0.5)
-
+    
     s_origine = graphe_interne.arcs[0].s_origine
 
     visite = []
     visite.append(s_origine)
     pile = Pile()
     pile.empiler(s_origine)
+
+    creer_sortie(damier, labirynthe, k)
+
 
     while not pile.est_vide():
         sommet = pile.depiler()
@@ -46,6 +59,8 @@ def creer_labirynthe(k):
             retire_arc(sommet.pos, sommet_choisi.pos, labirynthe, damier)
             visite.append(sommet_choisi)
             pile.empiler(sommet_choisi)
+            affiche_ecran(labirynthe)
+    
     
     return labirynthe
 
@@ -58,6 +73,24 @@ def direction(point_depart, point_arrivee):
     if y == 1.0: return "bas"
     else: return "haut"
 
+def affiche_ecran(graphe):
+    screen.fill("black")
+    for arc in graphe.arcs:
+        x = (arc.s_origine.pos[0]*6*taille, arc.s_origine.pos[1]*6*taille)
+        y = (arc.s_extremite.pos[0]*6*taille, arc.s_extremite.pos[1]*6*taille)
+        pygame.draw.line(screen,"white",x, y, 1) 
+    pygame.display.update()
+    #time.sleep(0.1)
+    print("here")
+
+
+def creer_sortie(damier, graphe, k):
+    p = randint(0,k-2)
+    print(p)
+    graphe.retireArc(damier[(0,p)],damier[(0,p+1)])
+    graphe.retireArc(damier[(k-1,k-p)], damier[(k-1,k-p+1)])
+    
+    
 
 def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
     """retire l'arc sur le graphe externe"""
@@ -78,22 +111,20 @@ def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
         labirynthe.retireArc(damier[x_depart+0.5,y_depart-0.5],damier[x_arrivee-0.5, y_arrivee+0.5])
 
 
-taille = int(input("Combien de largeur ?"))
+
+
+
+RUNNING = True
 a = creer_labirynthe(taille)
 
 
-pygame.init()
-screen = pygame.display.set_mode((600,600))
-pygame.display.set_caption("Echecs")
-
-running = True
-while running:
+while RUNNING:
     #mettre à jour l'écran
     for arc in a.arcs:
-        x = (arc.s_origine.pos[0]*10, arc.s_origine.pos[1]*10)
-        y = (arc.s_extremite.pos[0]*10, arc.s_extremite.pos[1]*10)
-        pygame.draw.line(screen,"white",x, y, 1)   
+        x = (arc.s_origine.pos[0]*6*taille, arc.s_origine.pos[1]*6*taille)
+        y = (arc.s_extremite.pos[0]*6*taille, arc.s_extremite.pos[1]*6*taille)
+        pygame.draw.line(screen,"white",x, y, 1) 
     pygame.display.update()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            running = False
+            RUNNING = False
