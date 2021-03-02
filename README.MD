@@ -1,13 +1,15 @@
-BUT DU PROJET
+<h1 align="center">Labyrinthe pygame</h1>
 
--Avoir un labyrinthe de taille k possédant une arrivée et une fin
+### BUT DU PROJET
 
--Une implémentation en arbre ou en graphe
+- **Avoir un labyrinthe de taille k possédant une arrivée et une fin**
 
--Une solution pour le labyrinthe créé
+- **Une implémentation en arbre ou en graphe**
 
--Une interface pygame
+- **Une solution pour le labyrinthe créé**
 
--Un joueur doit pouvoir se déplacer dans le labirynthe
+- **Une interface pygame**
+
+- **Un joueur doit pouvoir se déplacer dans le labirynthe**
 
 
