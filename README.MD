@@ -14,5 +14,5 @@
 
 ### Génération du labirynthe
 
-<img src="./assets/labirynthe.png">
+<p align="center"> <img src="./assets/labirynthe.png"> </p>
 
