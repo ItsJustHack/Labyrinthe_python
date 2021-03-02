@@ -1,6 +1,6 @@
 <h1 align="center">Labyrinthe pygame</h1>
 
-### BUT DU PROJET
+### But du projet
 
 - **Avoir un labyrinthe de taille k possédant une arrivée et une fin**
 
@@ -12,4 +12,7 @@
 
 - **Un joueur doit pouvoir se déplacer dans le labirynthe**
 
+### Génération du labirynthe
+
+<img src="./assets/labirynthe.png">
 
