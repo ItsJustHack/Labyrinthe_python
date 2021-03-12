@@ -11,22 +11,21 @@ class Player:
 
     def turn_right(self):
         #self.damier[(3,1)]
-        if not self.graphe.presence_arc(self.damier[( self.x+0.5 , self.y+0.5 )], self.damier[( self.x+0.5 , self.y-0.5 )]):
-            self.x+=1
-            print("here", self.x, self.y)
+        try:
+            if not self.graphe.presence_arc(self.damier[( self.x+0.5 , self.y+0.5 )], self.damier[( self.x+0.5 , self.y-0.5 )]):
+                self.x+=1
+        except KeyError:
+            print("Bien joué tu as résolu le labirynthe")
 
     def turn_left(self):
         if not self.graphe.presence_arc(self.damier[( self.x-0.5 , self.y+0.5 )], self.damier[( self.x-0.5 , self.y-0.5 )]):
             self.x-=1
-            print("here", self.x, self.y)
 
 
     def turn_up(self):
         if not self.graphe.presence_arc(self.damier[( self.x-0.5 , self.y-0.5 )], self.damier[( self.x+0.5 , self.y-0.5 )]):
             self.y-=1
-            print("here", self.x, self.y)
 
     def turn_down(self):
         if not self.graphe.presence_arc(self.damier[( self.x-0.5 , self.y+0.5 )], self.damier[( self.x+0.5 , self.y+0.5 )]):
             self.y+=1
-            print("here", self.x, self.y)

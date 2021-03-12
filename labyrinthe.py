@@ -78,16 +78,7 @@ def creer_labirynthe(k, screen):
     sortie:
     -un graphe représentant un labyrinthe"""
 
-    def affiche_ecran(graphe):
-        screen.fill("black")
-        for arc in graphe.arcs:
-            x = (arc.s_origine.pos[0] * 600 / k, arc.s_origine.pos[1] * 600 /k)
-            y = (arc.s_extremite.pos[0] * 600 / k, arc.s_extremite.pos[1] * 600 /k)
-            pygame.draw.line(screen, "white", x, y, 1)
-        pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                raise "Jeu arrêté"
+    
 
 
     damier = creer_damier_vide(k)
@@ -115,7 +106,7 @@ def creer_labirynthe(k, screen):
             retire_arc(sommet.pos, sommet_choisi.pos, labirynthe, damier)
             visite.append(sommet_choisi)
             pile.empiler(sommet_choisi)
-            affiche_ecran(labirynthe)
+            affiche_ecran(labirynthe, k, screen)
 
     return labirynthe, damier
 
@@ -134,10 +125,19 @@ def direction(point_depart, point_arrivee):
         return "haut"
 
 
+def affiche_ecran(graphe, k, screen):
+        screen.fill("black")
+        for arc in graphe.arcs:
+            x = (arc.s_origine.pos[0] * 600 / k, arc.s_origine.pos[1] * 600 /k)
+            y = (arc.s_extremite.pos[0] * 600 / k, arc.s_extremite.pos[1] * 600 /k)
+            pygame.draw.line(screen, "white", x, y, 1)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                raise "Jeu arrêté"
 
 def creer_sortie(damier, graphe, k):
     p = randint(2, k - 2)
-    graphe.retireArc(damier[(0, p)], damier[(0, p + 1)])
     graphe.retireArc(damier[(k - 1, k - p)], damier[(k - 1, k - p+1)])
 
 
