@@ -28,30 +28,35 @@ def affiche_ecran(graphe):
 
     #time.sleep(3)
 player = Player(0.5,0.5,damier, a)
+
 while RUNNING:
-    # mettre à jour l'écran
-    for arc in a.arcs:
-        x = (arc.s_origine.pos[0] * 2 /taille, arc.s_origine.pos[1] * 2 /taille)
-        y = (arc.s_extremite.pos[0] * 2 /taille, arc.s_extremite.pos[1] * 2 /taille)
-        pygame.draw.line(screen, "white", x, y, 1)
-    screen.blit(player.image, (player.x*600/taille, player.y*600/taille))
+
+    screen.blit(player.image, ((player.x * 600 - 100) / taille, (player.y * 600 - 100) / taille))
+    
     pygame.display.update()
+
     for event in pygame.event.get():
+
         if event.type == pygame.QUIT:
             RUNNING = False
+
         if event.type == pygame.KEYDOWN:
+
             if event.key == pygame.K_RIGHT:
                 player.turn_right()
                 time.sleep(0.1)
                 affiche_ecran(a)
+
             if event.key == pygame.K_LEFT:
                 player.turn_left()
                 time.sleep(0.1)
                 affiche_ecran(a)
+
             if event.key == pygame.K_UP:
                 player.turn_up()
                 time.sleep(0.1)
                 affiche_ecran(a)
+
             if event.key == pygame.K_DOWN:
                 player.turn_down()
                 time.sleep(0.1)
