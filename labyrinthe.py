@@ -117,7 +117,7 @@ def creer_labirynthe(k, screen):
             pile.empiler(sommet_choisi)
             affiche_ecran(labirynthe)
 
-    return labirynthe
+    return labirynthe, damier
 
 
 def direction(point_depart, point_arrivee):
@@ -136,9 +136,9 @@ def direction(point_depart, point_arrivee):
 
 
 def creer_sortie(damier, graphe, k):
-    p = randint(0, k - 2)
+    p = randint(2, k - 2)
     graphe.retireArc(damier[(0, p)], damier[(0, p + 1)])
-    graphe.retireArc(damier[(k - 1, k - p)], damier[(k - 1, k - p + 1)])
+    graphe.retireArc(damier[(k - 1, k - p)], damier[(k - 1, k - p+1)])
 
 
 def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):

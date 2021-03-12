@@ -29,6 +29,12 @@ class Graphe:
         self.arcs.append(arc)
         self.arcs.append(self.ajouter_arc_inverse(arc))
     
+    def presence_arc(self, sommet_depart, sommet_arrivee):
+        for arc in self.arcs:
+            if arc.s_origine == sommet_depart and arc.s_extremite == sommet_arrivee:
+                return arc
+        return False
+    
     def retireArc(self, s_origine, s_extremite):
         truc = False
         a = self.arcs.copy()
