@@ -93,8 +93,9 @@ def creer_labirynthe(k, screen):
     pile = Pile()
     pile.empiler(s_origine)
 
-    creer_sortie(damier, labirynthe, k)
-
+    sommet_sortie = creer_sortie(damier, damier_interne, labirynthe, k)
+    solution = False
+    Lsolution = [s_origine]
     while not pile.est_vide():
         sommet = pile.depiler()
         liste_sommets_adjacents_non_visites = list(
@@ -106,9 +107,12 @@ def creer_labirynthe(k, screen):
             retire_arc(sommet.pos, sommet_choisi.pos, labirynthe, damier)
             visite.append(sommet_choisi)
             pile.empiler(sommet_choisi)
+            if sommet_choisi == sommet_sortie: solution = True
+            if not solution: Lsolution.append(sommet_choisi)
             affiche_ecran(labirynthe, k, screen)
-
-    return labirynthe, damier
+        else:
+            if not solution: Lsolution.remove(Lsolution[len(Lsolution)-1])
+    return labirynthe, damier, Lsolution
 
 
 def direction(point_depart, point_arrivee):
@@ -126,19 +130,28 @@ def direction(point_depart, point_arrivee):
 
 
 def affiche_ecran(graphe, k, screen):
-        screen.fill("black")
-        for arc in graphe.arcs:
-            x = (arc.s_origine.pos[0] * 600 / k, arc.s_origine.pos[1] * 600 /k)
-            y = (arc.s_extremite.pos[0] * 600 / k, arc.s_extremite.pos[1] * 600 /k)
-            pygame.draw.line(screen, "white", x, y, 1)
-        pygame.display.update()
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                raise "Jeu arrêté"
+    screen.fill("black")
+    for arc in graphe.arcs:
+        x = (arc.s_origine.pos[0] * 600 / k, arc.s_origine.pos[1] * 600 /k)
+        y = (arc.s_extremite.pos[0] * 600 / k, arc.s_extremite.pos[1] * 600 /k)
+        pygame.draw.line(screen, "white", x, y, 1)
+    pygame.display.update()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            raise "Jeu arrêté"
 
-def creer_sortie(damier, graphe, k):
-    p = randint(2, k - 2)
+
+def affiche_sortie(Lsolution, k, screen):
+    for i in range(len(Lsolution)-1):
+        x = (Lsolution[i].pos[0] * 600 / k, Lsolution[i].pos[1] * 600 /k)
+        y = (Lsolution[i+1].pos[0] * 600 / k, Lsolution[i+1].pos[1] * 600 /k)
+        pygame.draw.line(screen, "red", x, y, 1)
+    pygame.display.update()
+
+def creer_sortie(damier, damier_interne, graphe, k):
+    p = randint(3, k - 2)
     graphe.retireArc(damier[(k - 1, k - p)], damier[(k - 1, k - p+1)])
+    return damier_interne[(k - 1.5, k - p + 1.5)]
 
 
 def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
@@ -169,4 +182,3 @@ def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
             damier[x_depart + 0.5, y_depart - 0.5],
             damier[x_arrivee - 0.5, y_arrivee + 0.5],
         )
-
