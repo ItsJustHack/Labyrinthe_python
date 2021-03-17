@@ -19,7 +19,7 @@ def creer_damier_vide(k, addition=0):
             (i + addition, j + addition), (i + addition, j + addition)
         )
         for i in range(k)
-        for j in range(k)
+        for j in range(k) 
     }
 
 
@@ -78,11 +78,9 @@ def creer_labirynthe(k, screen):
     sortie:
     -un graphe représentant un labyrinthe"""
 
-    
+    damier = creer_damier_vide(k) # grille de sommet
+    damier_interne = creer_damier_vide(k - 1, 0.5) #
 
-
-    damier = creer_damier_vide(k)
-    damier_interne = creer_damier_vide(k - 1, 0.5)
     labirynthe = creer_graphe(damier, k)
     graphe_interne = creer_graphe(damier_interne, k - 1, 0.5)
 
@@ -107,8 +105,8 @@ def creer_labirynthe(k, screen):
             retire_arc(sommet.pos, sommet_choisi.pos, labirynthe, damier)
             visite.append(sommet_choisi)
             pile.empiler(sommet_choisi)
-            if sommet_choisi == sommet_sortie: solution = True
             if not solution: Lsolution.append(sommet_choisi)
+            if sommet_choisi == sommet_sortie: solution = True
             affiche_ecran(labirynthe, k, screen)
         else:
             if not solution: Lsolution.remove(Lsolution[len(Lsolution)-1])
@@ -151,7 +149,7 @@ def affiche_sortie(Lsolution, k, screen):
 def creer_sortie(damier, damier_interne, graphe, k):
     p = randint(3, k - 2)
     graphe.retireArc(damier[(k - 1, k - p)], damier[(k - 1, k - p+1)])
-    return damier_interne[(k - 1.5, k - p + 1.5)]
+    return damier_interne[(k - 1.5, k - p + 0.5)]
 
 
 def retire_arc(sommet_origine, sommet_extremite, labirynthe, damier):
