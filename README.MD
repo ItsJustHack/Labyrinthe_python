@@ -30,5 +30,5 @@
 
 - **Ainsi on obtient le schéma suivant :**
 
-<p align="center> <img src="./assets/maze_generation.gif"> </p>
+<p align="center> <a href="./assets/maze_generation.gif"> </p>
 
