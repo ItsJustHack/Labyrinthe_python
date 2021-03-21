@@ -1,40 +1,41 @@
 class Sommet:
-    def __init__(self,nom,pos):
+    def __init__(self, nom, pos):
         self.nom = nom
         self.pos = pos
 
     def __str__(self):
         return f"Sommet : {self.nom}"
 
+
 class Arc:
-    def __init__(self,nom,s_origine,s_extremite):
-        self.nom=nom
-        self.s_origine=s_origine
-        self.s_extremite=s_extremite
-    
+    def __init__(self, nom, s_origine, s_extremite):
+        self.nom = nom
+        self.s_origine = s_origine
+        self.s_extremite = s_extremite
+
     def __str__(self):
         return f"Arc {self.nom} de {self.s_origine.nom} à {self.s_extremite.nom}"
 
 
 class Graphe:
     def __init__(self):
-        self.arcs=[]
+        self.arcs = []
         self.compteur = 0
         self.appel = 0
 
-    def ajouter_arc_inverse(self,arc):
+    def ajouter_arc_inverse(self, arc):
         return Arc(arc.nom, arc.s_extremite, arc.s_origine)
 
-    def ajouterArc(self,arc):
+    def ajouterArc(self, arc):
         self.arcs.append(arc)
         self.arcs.append(self.ajouter_arc_inverse(arc))
-    
+
     def presence_arc(self, sommet_depart, sommet_arrivee):
         for arc in self.arcs:
             if arc.s_origine == sommet_depart and arc.s_extremite == sommet_arrivee:
                 return arc
         return False
-    
+
     def retireArc(self, s_origine, s_extremite):
         truc = False
         a = self.arcs.copy()
@@ -42,12 +43,13 @@ class Graphe:
             if arc.s_origine == s_origine and arc.s_extremite == s_extremite:
                 self.arcs.remove(arc)
                 truc = True
-            
+
             elif arc.s_extremite == s_origine and arc.s_origine == s_extremite:
                 self.arcs.remove(arc)
                 truc = True
-            
-        if not truc: print(s_origine, s_extremite)
+
+        if not truc:
+            print(s_origine, s_extremite)
 
     def sommet_adjacent(self, sommet):
         liste_sommets_adjacents = []
@@ -60,5 +62,5 @@ class Graphe:
         aff = ""
         aff += "\t Liste des arcs : \n"
         for a in self.arcs:
-            aff += "\t\t"+str(a)+"\n"
+            aff += "\t\t" + str(a) + "\n"
         return aff
