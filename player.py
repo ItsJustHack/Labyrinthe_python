@@ -3,12 +3,15 @@ import pygame
 
 
 class Player:
-    def __init__(self, damier, graphe, taille):
+    def __init__(self, damier, graphe, taille, nombre):
         self.x = 0.5
         self.y = 0.5
         self.damier = damier
         self.graphe = graphe
-        self.i = pygame.image.load("assets/player.png")
+        if nombre==1:
+            self.i = pygame.image.load("assets/player.png")
+        if nombre==2:
+            self.i = pygame.image.load("assets/player2.png")
         self.image = pygame.transform.scale(self.i, (300 // taille, 300 // taille))
 
     def turn_right(self):  # fonction pour aller à droite

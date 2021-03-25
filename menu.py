@@ -16,12 +16,19 @@ class Menu:
         self.background_set("assets/background.png")
         # ============================
         # Button:
+
+        self.start_solo_button = bt(
+            (255, 255, 255), width / 2 - 125, height / 2 - 150, 250, 100, "Solo"
+        )
+        self.start_duo_button = bt(
+            (255, 222, 7), width / 2 - 125, height / 2, 250, 100, "Duo"
+        )
+
         self.quit_button = bt(
-            (255, 255, 255), width / 2 - 125, height / 2, 250, 100, "Quitter"
+            (255, 255, 255), width / 2 - 125, height / 2 + 150, 250, 100, "Quitter"
         )
-        self.start_button = bt(
-            (255, 255, 255), width / 2 - 125, height / 2 - 150, 250, 100, "Démarer"
-        )
+
+        
         self.deco_button1 = bt(
             (255, 255, 255), width / 2 - 225, height / 2 - 232 - 20, 200, 50, "Taille :"
         )
@@ -52,16 +59,10 @@ class Menu:
                 self.background_set("assets/background.png")
                 self.user_text = ""
 
-            if self.user_text == "alexcendrenoel":
-                self.background_set("assets/meme.png")
+            if self.user_text == "matrix":
+                self.background_set("assets/secret.png")
                 self.user_text = ""
 
-            if self.user_text == "???????????????????????????????????????????????":
-                self.background = pygame.image.load("assets/meme2.png")
-                self.background_set("assets/meme2.png")
-                self.user_text = ""
-
-            self.secret_button = bt((0, 0, 0), 0, 0, 3, 3, "")
             # =====================================================================
 
             if self.backgroundX < self.background.get_width() * -1:
@@ -79,10 +80,15 @@ class Menu:
                 else:
                     self.quit_button.color = (255, 255, 255)
 
-                if self.start_button.isOver(mouse):
-                    self.start_button.color = (0, 155, 0)
+                if self.start_solo_button.isOver(mouse):
+                    self.start_solo_button.color = (0, 155, 0)
                 else:
-                    self.start_button.color = (255, 255, 255)
+                    self.start_solo_button.color = (255, 255, 255)
+
+                if self.start_duo_button.isOver(mouse):
+                    self.start_duo_button.color = (255, 222, 7)
+                else:
+                    self.start_duo_button.color = (255, 255, 255)
 
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -91,17 +97,19 @@ class Menu:
                     if self.quit_button.isOver(mouse):
                         running = False
                         pygame.quit()
-                    if self.secret_button.isOver(mouse):
-                        self.background_set("assets/secret.png")
 
-                    if self.start_button.isOver(mouse):
+                    if self.start_solo_button.isOver(mouse):
                         self.test_entree()
-                        self.laby(int(self.user_text))
+                        self.laby(int(self.user_text),False)
+
+                    if self.start_duo_button.isOver(mouse):
+                        self.test_entree()
+                        self.laby(int(self.user_text),True)
 
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
                         self.test_entree()
-                        self.laby(int(self.user_text))
+                        self.laby(int(self.user_text), False)
 
                     if event.key == pygame.K_BACKSPACE:
                         self.user_text = self.user_text[:-1]
@@ -113,7 +121,8 @@ class Menu:
         self.screen.blit(self.background, (self.backgroundX, 0))
         self.screen.blit(self.background, (self.backgroundX2, 0))
         self.quit_button.draw(self.screen, (155, 0, 0))
-        self.start_button.draw(self.screen, (0, 155, 0))
+        self.start_solo_button.draw(self.screen, (0, 155, 0))
+        self.start_duo_button.draw(self.screen, (255, 222, 7))
         self.deco_button1.draw(self.screen, (0, 0, 0))
         self.deco_button2.draw(self.screen, (0, 0, 0))
 
