@@ -15,7 +15,7 @@
 
 ### Fonctionnement du labyrinthe
 - **On crée deux grilles de sommmets (une capable de "rentrer" dans l'autre**
-- **On relie les sommets adjacents entre eux, on obtient donc deux graphes**
+- **On relie les sommets adjacents entre eux, on obtient donc deux graphes (externe à gauche, interne à droite)**
  </cr><p align="center"> <img src="./assets/grille.png"> <img src="./assets/grille_interne.png"> </p>
 - **Deux graphes rectangulaires sont ainsi créés, un externe et un interne**
 - **Le graphe interne se situe "à l'intérieur" du graphe externe**
