@@ -62,21 +62,23 @@ def main(taille,duo):
                 if event.key == pygame.K_DOWN:  # flêche bas
                     player1.turn_down()
 
-                if event.key == pygame.K_d and duo:  #  droite
-                    if player2.turn_right() == 0:
-                        print(
-                            "Bien joué tu as terminé le labyrinthe, veux-tu recommencer ?"
-                        )
-                        RUNNING = False
+                if duo:
 
-                if event.key == pygame.K_q and duo:  #  gauche
-                    player2.turn_left()
+                    if event.key == pygame.K_d:  #  droite
+                        if player2.turn_right() == 0:
+                            print(
+                                "Bien joué tu as terminé le labyrinthe, veux-tu recommencer ?"
+                            )
+                            RUNNING = False
 
-                if event.key == pygame.K_z and duo:  #  haut
-                    player2.turn_up()
+                    if event.key == pygame.K_q:  #  gauche
+                        player2.turn_left()
 
-                if event.key == pygame.K_s and duo:  #  bas
-                    player2.turn_down()
+                    if event.key == pygame.K_z:  #  haut
+                        player2.turn_up()
+
+                    if event.key == pygame.K_s:  #  bas
+                        player2.turn_down()
 
 
 
