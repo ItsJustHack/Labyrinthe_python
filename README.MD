@@ -10,7 +10,7 @@
 
 ### Génération du labirynthe
 
-<p align="center"> <img src="./assets/labirynthe.png">  </p>
+<p align="center"> <img src="./assets/labyrinthe.png">  </p>
 
 
 ### Fonctionnement du labyrinthe
