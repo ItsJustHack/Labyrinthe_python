@@ -30,5 +30,7 @@
 
 - **Ainsi on obtient le schéma suivant :**
 
+![](./assets/maze_generation.gif)
+
 <p align="center> <a href="./assets/maze_generation.gif"> </p>
 
