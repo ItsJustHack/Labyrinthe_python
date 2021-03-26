@@ -24,7 +24,7 @@
 - **L'arc "coupé" du graphe externe par le graphe interne est supprimé**
 - **Ainsi on obtient le schéma suivant (il faut imaginer les deux graphes comme des grilles):**
 
-![](./assets/maze_generation.gif)
+![gif](./assets/maze_generation.gif)
 
 ### Création de la solution
 
