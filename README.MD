@@ -6,9 +6,9 @@
 - **Une implémentation en graphe**
 - **Une solution pour le labyrinthe créé**
 - **Une interface pygame**
-- **Un joueur doit pouvoir se déplacer dans le labirynthe**
+- **Un joueur doit pouvoir se déplacer dans le labyrinthe**
 
-### Génération du labirynthe
+### Génération du labyrinthe
 
 <p align="center"> <img src="./assets/labyrinthe.png">  </p>
 
